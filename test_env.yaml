@@ -21,3 +21,4 @@ dependencies:
   - bioconda:pbgzip=2016.08.04
   - bioconda:bcftools=1.10.2
   - bioconda:bedtools=2.29.2
+  - bioconda:tabix=0.2.6

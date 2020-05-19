@@ -6,11 +6,13 @@ import os
 include: "rules/filter_gene.smk"
 include: "rules/filter_IC.smk"
 include :"rules/filter_cov.smk"
+include : "rules/gzip.smk"
+include : "rules/header.smk"
 
 
 SAMPLES=[]
 
-sample_id_list = glob.glob('vcf/*.vcf')
+sample_id_list = glob.glob('vcf/*.vcf.gz')
 for name in sample_id_list:
     SAMPLES.append(name.split('.')[0].split('/')[1].split('_')[0])
 
@@ -18,7 +20,7 @@ for name in sample_id_list:
 rule all:
     input:
         vcf_filtre = expand(
-                        "filter_vcf/filter_cov/{sample}.vcf",
+                        "results/{sample}.vcf.gz.tbi",
                         sample = SAMPLES
                     )
     message:

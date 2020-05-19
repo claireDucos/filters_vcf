@@ -73,10 +73,10 @@ rule filter_cov :
 
     shell :
           """
-           seuil=12
+           seuil=$(cat {input.seuil})
            if [ $seuil -le 10 ]
            then
-                grep  -E 'DP=[1-9][0-9]+' {input.vcf} | sort | uniq > {output}
+                grep  -E 'DP=[1-9][0-9]+' {input.vcf} > {output}
            else
                cat {input.dp_file} | awk -v seuil=$seuil '{{if($1>seuil)print $1}}' > {input.seuil};
                sed -i -e 's/^/DP=/' {input.seuil};
@@ -84,4 +84,3 @@ rule filter_cov :
            fi"""
 
 
-          # seuil=$(cat {input.seuil})
