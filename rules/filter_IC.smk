@@ -15,7 +15,7 @@ rule filter_IC:
             lambda wildcars, attempt: min(8 * attempt, 15)
         )
     log:
-        "filter_vcf/filter_IC/log/{sample}.log"
+        "logs/filter_IC/{sample}.log"
 
     shell :
         "grep -E 'set=Intersection|set=..-' {input} > {output}"
