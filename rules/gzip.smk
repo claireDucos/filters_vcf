@@ -2,7 +2,7 @@ rule decompress_vcf:
     input:
         "vcf/{sample}.vcf.gz"
     output:
-        "vcf/{sample}.vcf"
+        temp("vcf/{sample}.vcf")
     message:
         "decompressing {wildcards.sample}"
     threads:
