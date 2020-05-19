@@ -5,8 +5,8 @@ import os
 
 include: "rules/filter_gene.smk"
 include: "rules/filter_IC.smk"
-include : "rules/gzip.smk"
-include: "rules/filter_coverage.smk"
+include :"rules/filter_cov.smk"
+
 
 SAMPLES=[]
 
@@ -18,8 +18,8 @@ for name in sample_id_list:
 rule all:
     input:
         vcf_filtre = expand(
-            "filter_vcf/filter_cov/{sample}.vcf",
-            sample = SAMPLES
-        )
+                        "filter_vcf/filter_cov/{sample}.vcf",
+                        sample = SAMPLES
+                    )
     message:
         "Finishig filter pipeline"
