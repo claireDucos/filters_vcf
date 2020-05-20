@@ -17,7 +17,7 @@ rule decompress_vcf:
     log:
         "logs/compress/{sample}.vcf.log"
     shell:
-        "gzip -d {input} -f > {output}"
+        "pbgzip -d {input} -f > {output}"
 
 rule compress_vcf:
     input:

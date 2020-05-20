@@ -15,7 +15,7 @@ rule seletc_id:
             lambda wildcars, attempt: min(30 * attempt, 90)
         ),
         mem_mb = (
-            lambda wildcars, attempt: min(8 * attempt, 15)
+            lambda wildcars, attempt: min(128 * attempt, 512)
         )
     log:
         "logs/gene_list/id.log"
@@ -42,7 +42,7 @@ rule filter_id :
             lambda wildcars, attempt: min(30 * attempt, 90)
         ),
         mem_mb = (
-            lambda wildcars, attempt: min(8 * attempt, 15)
+            lambda wildcars, attempt: min(128 * attempt, 512)
         )
     log:
         "logs/filter_gene/{sample}.log"
