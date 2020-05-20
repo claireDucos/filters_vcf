@@ -12,7 +12,7 @@ include : "rules/header.smk"
 
 SAMPLES=[]
 
-sample_id_list = glob.glob('vcf/*.vcf.gz')
+sample_id_list = glob.glob('vcf/*.vcf')
 for name in sample_id_list:
     SAMPLES.append(name.split('.')[0].split('/')[1].split('_')[0])
 
