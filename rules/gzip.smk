@@ -4,7 +4,7 @@ rule decompress_vcf:
     output:
         temp("vcf/{sample}.vcf")
     message:
-        "decompressing {wildcards.sample}"
+        "Decompressing {wildcards.sample}"
     threads:
         4
     resources:
@@ -15,7 +15,7 @@ rule decompress_vcf:
             lambda wildcars, attempt: min(128 * attempt, 512)
         )
     log:
-        "logs/compress/{sample}.vcf.log"
+        "logs/decompress/{sample}.vcf.log"
     shell:
         "pbgzip -d {input} -f > {output}"
 
@@ -25,7 +25,7 @@ rule compress_vcf:
     output:
         "results/{sample}.vcf.gz"
     message:
-        "Compressing and indexing {wildcards.sample}"
+        "Compressing {wildcards.sample}"
     threads:
         2
     resources:
@@ -40,7 +40,7 @@ rule compress_vcf:
     log:
         "logs/compress/{sample}.vcf.log"
     shell:
-        "pbgzip -c {input} -n {threads} > {output} 2> {log}"
+        "pbgzip {input} -n {threads} -f> {output} 2> {log}"
 
 """
 This rule indexes a compressed VCF file
@@ -51,7 +51,7 @@ rule vcf_tabix:
     output:
          "results/{sample}.vcf.gz.tbi"
     message:
-        "Indexing annotated vcf for {wildcards.sample}"
+        "Indexing  {wildcards.sample}"
     threads:
         1
     resources:

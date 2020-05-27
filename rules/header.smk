@@ -1,10 +1,13 @@
+"""
+This rule get the vcf header
+"""
 rule header :
     input:
         vcf="vcf/{sample}.vcf",
     output:
         "filter_vcf/tmp/{sample}_header.vcf"
     message:
-        "filter gene :  {wildcards.sample}"
+        "Get the VCF header :  {wildcards.sample}"
     threads:
         1
     resources:
@@ -24,11 +27,11 @@ rule header :
 rule concatenate_vcf_header:
     input:
         head="filter_vcf/tmp/{sample}_header.vcf",
-        vcf="filter_vcf/filter_cov/{sample}.vcf"
+        vcf="filter_vcf/filter_DP/{sample}.vcf"
     output:
-        temp("results/{sample}.vcf")
+        "results/{sample}.vcf"
     message:
-        "filter gene :  {wildcards.sample}"
+        "Concatenate vcf header :  {wildcards.sample}"
     threads:
         1
     resources:
@@ -39,7 +42,7 @@ rule concatenate_vcf_header:
             lambda wildcars, attempt: min(128 * attempt, 512)
         )
     log:
-        "logs/concatenate/{sample}.log"
+        "logs/header/{sample}.log"
 
     shell :
         "cat {input.head} {input.vcf} > {output}"

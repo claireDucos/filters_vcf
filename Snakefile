@@ -5,10 +5,10 @@ import os
 
 include: "rules/filter_gene.smk"
 include: "rules/filter_IC.smk"
-include :"rules/filter_cov.smk"
 include : "rules/gzip.smk"
 include : "rules/header.smk"
 
+include: "rules/filter_dp_format.smk"
 
 SAMPLES=[]
 
