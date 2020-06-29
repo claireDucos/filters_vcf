@@ -9,10 +9,10 @@ rule filter_IC:
         1
     resources:
         time_min = (
-            lambda wildcars, attempt: min(30 * attempt, 90)
+            lambda wildcars, attempt: min(60 * attempt, 120)
         ),
         mem_mb = (
-            lambda wildcars, attempt: min(128 * attempt, 512)
+            lambda wildcars, attempt: min(1024 * attempt, 8192)
         )
     log:
         "logs/filter_IC/{sample}.log"

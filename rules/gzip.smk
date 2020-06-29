@@ -9,15 +9,15 @@ rule decompress_vcf:
         4
     resources:
         time_min = (
-            lambda wildcars, attempt: min(30 * attempt, 90)
+            lambda wildcars, attempt: min(60 * attempt, 120)
         ),
         mem_mb = (
-            lambda wildcars, attempt: min(128 * attempt, 512)
+            lambda wildcars, attempt: min(1024 * attempt, 8192)
         )
     log:
         "logs/decompress/{sample}.vcf.log"
     shell:
-        "pbgzip -d {input} -f > {output}"
+        "pbgzip -c -d {input} -f > {output}"
 
 rule compress_vcf:
     input:
@@ -30,10 +30,10 @@ rule compress_vcf:
         2
     resources:
         time_min = (
-            lambda wildcars, attempt: min(30 * attempt, 90)
+            lambda wildcars, attempt: min(60 * attempt, 120)
         ),
         mem_mb = (
-            lambda wildcars, attempt: min(128 * attempt, 512)
+            lambda wildcars, attempt: min(1024 * attempt, 8192)
         )
     conda:
         "../envs/pbgzip.yaml"
@@ -56,10 +56,10 @@ rule vcf_tabix:
         1
     resources:
         mem_mb = (
-            lambda wildcards, attempt: min(attempt * 512, 10240)
+            lambda wildcards, attempt: min(attempt *1024 , 8192)
         ),
         time_min = (
-            lambda wildcards, attempt: min(attempt * 20, 200)
+            lambda wildcards, attempt: min(attempt * 60, 120)
         )
     log:
         "logs/tabix/{sample}.log"
