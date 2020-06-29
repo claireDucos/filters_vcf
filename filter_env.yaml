@@ -1,0 +1,14 @@
+---
+#usage :  conda env create -f test_env.yaml
+name: vcf_filter
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - conda-forge::python=3.7.6
+  - conda-forge::git=2.26.0
+  - conda-forge::pandas=1.0.3
+  - bioconda::snakemake=5.14.0
+  - bioconda:pbgzip=2016.08.04
+  - bioconda:tabix=0.2.6
